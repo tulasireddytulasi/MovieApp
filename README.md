@@ -2,9 +2,9 @@
 
 <table>
   <tr>
-    <td>First Screen Page</td>
-     <td>Holiday Mention</td>
-     <td>Present day in purple and selected day in pink</td>
+    <td>Home Page</td>
+     <td>Movie Page</td>
+     <td>Movie Page</td>
   </tr>
   <tr>
     <td><img src="https://raw.githubusercontent.com/tulasireddytulasi/MovieApp/master/MovieApp1.jpg" width=270 height=480></td>
