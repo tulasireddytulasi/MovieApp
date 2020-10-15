@@ -1,5 +1,7 @@
 <h2> Movie App </h2> 
 
+<p> Movie App Contains all details of latest movies in all languages..</p>
+
 <table border='0'>
   <tr>
     <td>Home Page</td>
