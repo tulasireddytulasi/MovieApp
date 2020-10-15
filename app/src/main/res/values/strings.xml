@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">ViewPagerBanner</string>
+    <string name="search">Search</string>
+    <string name="popular">Popular Movies</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="theaters">In Theaters</string>
+    <string name="upcoming">Upcoming Movies</string>
+    <string name="latest">Latest Movies</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="view">View All</string>
+    <string name="movie">Avengers</string>
+    <string name="telugumovies">Telugu Movies</string>
+    <string name="hindimovies">Hindi Movies</string>
+    <string name="tamilmovies">Tamil Movies</string>
+    <string name="kanadamovies">Kanada Movies</string>
+    <string name="interteller">Intersteller</string>
+    <string name="overview">Interstellar chronicles the adventures of a group of explorers
+        who make use of a newly discovered wormhole to surpass the limitations on human
+        space travel and conquer the vast distances involved in an interstellar voyage.
+</string>
+    <string name="movie_voting">299.795</string>
+    <string name="geners">Action | Adventure | Science Friction</string>
+    <string name="rating">6.2</string>
+    <string name="rating1">Rating</string>
+    <string name="movie_time">2hr 40min</string>
+    <string name="director">Director : Chritopher Nolan</string>
+    <string name="director_name">Chritopher Nolan</string>
+    <string name="release_date">Release Date : 2014-11-05</string>
+    <string name="release_data1">2014-11-05</string>
+    <string name="movie_budget">Movie Budget : $165 Million</string>
+    <string name="movie_budget_cost">$165 Million</string>
+    <string name="movie_revenue">Movie Revenue : $487.1 Million</string>
+    <string name="movie_revenue_cost">$487.1 Million</string>
+    <string name="story_line">Story Line</string>
+
+
+</resources>
