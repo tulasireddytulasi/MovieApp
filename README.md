@@ -1,4 +1,4 @@
-<p> Movie App </p> 
+<h2> Movie App </h2> 
 
 <table>
   <tr>
