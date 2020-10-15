@@ -1,6 +1,6 @@
 <h2> Movie App </h2> 
 
-<table>
+<table border='1'>
   <tr>
     <td>Home Page</td>
      <td>Movie Page</td>
