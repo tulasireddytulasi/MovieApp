@@ -1,20 +1,10 @@
 package com.example.viewpagerbanner.dataModel;
 
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.databinding.BindingAdapter;
-
-import com.bumptech.glide.Glide;
-import com.example.viewpagerbanner.R;
-
 import java.util.List;
 
-public class MoviePage1 {
+public class Movie_Credits {
 
     private Credits credits;
-    private Videos videos;
     private int vote_count;
     private double vote_average;
     private boolean video;
@@ -37,6 +27,7 @@ public class MoviePage1 {
     private String homepage;
     private List<Genres> genres;
     private int budget;
+    private Belongs_to_collection belongs_to_collection;
     private String backdrop_path;
     private boolean adult;
 
@@ -46,14 +37,6 @@ public class MoviePage1 {
 
     public void setCredits(Credits credits) {
         this.credits = credits;
-    }
-
-    public Videos getVideos() {
-        return videos;
-    }
-
-    public void setVideos(Videos videos) {
-        this.videos = videos;
     }
 
     public int getVote_count() {
@@ -232,6 +215,14 @@ public class MoviePage1 {
         this.budget = budget;
     }
 
+    public Belongs_to_collection getBelongs_to_collection() {
+        return belongs_to_collection;
+    }
+
+    public void setBelongs_to_collection(Belongs_to_collection belongs_to_collection) {
+        this.belongs_to_collection = belongs_to_collection;
+    }
+
     public String getBackdrop_path() {
         return backdrop_path;
     }
@@ -246,195 +237,6 @@ public class MoviePage1 {
 
     public void setAdult(boolean adult) {
         this.adult = adult;
-    }
-
-    public static class Videos {
-        private List<Results> results;
-
-        public List<Results> getResults() {
-            return results;
-        }
-
-        public void setResults(List<Results> results) {
-            this.results = results;
-        }
-    }
-
-    public static class Results {
-        private String type;
-        private int size;
-        private String site;
-        private String name;
-        private String key;
-        private String iso_3166_1;
-        private String iso_639_1;
-        private String id;
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public void setSize(int size) {
-            this.size = size;
-        }
-
-        public String getSite() {
-            return site;
-        }
-
-        public void setSite(String site) {
-            this.site = site;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        public String getIso_3166_1() {
-            return iso_3166_1;
-        }
-
-        public void setIso_3166_1(String iso_3166_1) {
-            this.iso_3166_1 = iso_3166_1;
-        }
-
-        public String getIso_639_1() {
-            return iso_639_1;
-        }
-
-        public void setIso_639_1(String iso_639_1) {
-            this.iso_639_1 = iso_639_1;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-    }
-
-    public static class Spoken_languages {
-        private String name;
-        private String iso_639_1;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getIso_639_1() {
-            return iso_639_1;
-        }
-
-        public void setIso_639_1(String iso_639_1) {
-            this.iso_639_1 = iso_639_1;
-        }
-    }
-
-    public static class Production_countries {
-        private String name;
-        private String iso_3166_1;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getIso_3166_1() {
-            return iso_3166_1;
-        }
-
-        public void setIso_3166_1(String iso_3166_1) {
-            this.iso_3166_1 = iso_3166_1;
-        }
-    }
-
-    public static class Production_companies {
-        private String origin_country;
-        private String name;
-        private String logo_path;
-        private int id;
-
-        public String getOrigin_country() {
-            return origin_country;
-        }
-
-        public void setOrigin_country(String origin_country) {
-            this.origin_country = origin_country;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getLogo_path() {
-            return logo_path;
-        }
-
-        public void setLogo_path(String logo_path) {
-            this.logo_path = logo_path;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-    }
-
-    public static class Genres {
-        private String name;
-        private int id;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
     }
 
     public static class Credits {
@@ -503,14 +305,7 @@ public class MoviePage1 {
             this.profile_path = profile_path;
         }
 
-        @BindingAdapter({"Img_url"})
-        public static void setProfileImg(ImageView view, String profile_path){
-            Glide.with(view.getContext())
-                    .load(profile_path)
-                    .placeholder(R.drawable.poster)
-                    .centerCrop()
-                    .into(view);
-        }
+
 
         public double getPopularity() {
             return popularity;
@@ -677,6 +472,156 @@ public class MoviePage1 {
 
         public void setAdult(boolean adult) {
             this.adult = adult;
+        }
+    }
+
+    public static class Spoken_languages {
+        private String name;
+        private String iso_639_1;
+        private String english_name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getIso_639_1() {
+            return iso_639_1;
+        }
+
+        public void setIso_639_1(String iso_639_1) {
+            this.iso_639_1 = iso_639_1;
+        }
+
+        public String getEnglish_name() {
+            return english_name;
+        }
+
+        public void setEnglish_name(String english_name) {
+            this.english_name = english_name;
+        }
+    }
+
+    public static class Production_countries {
+        private String name;
+        private String iso_3166_1;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getIso_3166_1() {
+            return iso_3166_1;
+        }
+
+        public void setIso_3166_1(String iso_3166_1) {
+            this.iso_3166_1 = iso_3166_1;
+        }
+    }
+
+    public static class Production_companies {
+        private String origin_country;
+        private String name;
+        private String logo_path;
+        private int id;
+
+        public String getOrigin_country() {
+            return origin_country;
+        }
+
+        public void setOrigin_country(String origin_country) {
+            this.origin_country = origin_country;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getLogo_path() {
+            return logo_path;
+        }
+
+        public void setLogo_path(String logo_path) {
+            this.logo_path = logo_path;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+    }
+
+    public static class Genres {
+        private String name;
+        private int id;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+    }
+
+    public static class Belongs_to_collection {
+        private String backdrop_path;
+        private String poster_path;
+        private String name;
+        private int id;
+
+        public String getBackdrop_path() {
+            return backdrop_path;
+        }
+
+        public void setBackdrop_path(String backdrop_path) {
+            this.backdrop_path = backdrop_path;
+        }
+
+        public String getPoster_path() {
+            return poster_path;
+        }
+
+        public void setPoster_path(String poster_path) {
+            this.poster_path = poster_path;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
     }
 }

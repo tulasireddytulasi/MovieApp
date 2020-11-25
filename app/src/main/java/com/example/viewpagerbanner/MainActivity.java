@@ -22,6 +22,9 @@ import com.example.viewpagerbanner.Adapter.KannadaMoviesAdapter;
 import com.example.viewpagerbanner.Adapter.RecyclerviewAdapter1;
 import com.example.viewpagerbanner.Adapter.TamilMoviesAdapter;
 import com.example.viewpagerbanner.Adapter.TeluguMoviesAdapter;
+import com.example.viewpagerbanner.Transformation.Gallery;
+import com.example.viewpagerbanner.Transformation.Gallery1;
+import com.example.viewpagerbanner.Transformation.ZoomOutPageTransformer;
 import com.example.viewpagerbanner.networkcalls.OnClickListener;
 import com.example.viewpagerbanner.networkcalls.RetrofitClient;
 import com.example.viewpagerbanner.Transformation.ParallexTransformation;
@@ -41,10 +44,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class MainActivity extends AppCompatActivity implements OnClickListener{
 
-
-    public static final String API_KEYS = "434fcadef5103207fecca9176385a533";
+    public static String movie_type = null;
+    public static String language = null;
     private ActivityMainBinding activityMainBinding;
     private List<NowPlaying.ResultsBean1> nowplayingdata;
     private List<TeluguMoviesDataModel.ResultsBean1> topRatedmodel;
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-//        activityMainBinding.coordinator.setVisibility(View.INVISIBLE);
+        activityMainBinding.coordinator.setVisibility(View.INVISIBLE);
 //        final Handler handler = new Handler();
 //        final Runnable runnable = new Runnable() {
 //            @Override
@@ -108,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         activityMainBinding.recyclerview5.setHasFixedSize(true);
 
         activityMainBinding.viewpager.setPadding(0, 0, 70, 0);
-        activityMainBinding.viewpager.setPageTransformer(true, new ParallexTransformation());
+        activityMainBinding.viewpager.setPageTransformer(true, new Gallery1());
 
-
+        NextActivity();
 //        final Handler handlers = new Handler();
 //        final Runnable runnables = new Runnable() {
 //            @Override
@@ -137,6 +140,58 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     }
 
+    private void NextActivity() {
+        activityMainBinding.englishMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie_type = "popular";
+                language = english;
+                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+                startActivity(intent2);
+            }
+        });
+
+        activityMainBinding.teleguMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie_type = "popular";
+                language = telugu;
+                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+                startActivity(intent2);
+            }
+        });
+
+        activityMainBinding.hindiMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie_type = "popular";
+                language = hindi;
+                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+                startActivity(intent2);
+            }
+        });
+
+        activityMainBinding.tamilMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie_type = "popular";
+                language = tamil;
+                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+                startActivity(intent2);
+            }
+        });
+
+        activityMainBinding.kannadaMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                movie_type = "popular";
+                language = kannada;
+                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+                startActivity(intent2);
+            }
+        });
+    }
+
     private void ToolBars() {
         activityMainBinding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -144,7 +199,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 switch (item.getItemId()) {
                     case R.id.item1: Toast.makeText(getApplicationContext(),"Search Bar",Toast.LENGTH_SHORT).show();
                         break;
-
                 }
                 return true;
             }
@@ -166,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                     @Override
                     public void onResponse(Call<NowPlaying> call, Response<NowPlaying> response) {
                         if (response.body() != null) {
+                            activityMainBinding.coordinator.setVisibility(View.VISIBLE);
                             nowplayingdata = response.body().getResults();
                             adapter1 = new RecyclerviewAdapter1(MainActivity.this, nowplayingdata, MainActivity.this);
                             activityMainBinding.recyclerview1.setAdapter(adapter1);
@@ -292,8 +347,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(NowPlaying.ResultsBean1 nowPlaying) {
         Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) nowPlaying.getId();
-        intent.putExtra("movie_ID", id);
-        startActivity(intent);
+        if (id != 0){
+            intent.putExtra("movie_ID", id);
+            startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -301,33 +360,53 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onTeluguMoviesClick(TeluguMoviesDataModel.ResultsBean1 telugumovies) {
         Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) telugumovies.getId();
-        intent.putExtra("movie_ID", id);
-        startActivity(intent);
+        Toast.makeText(MainActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+        if (id != 0){
+            intent.putExtra("movie_ID", id);
+            startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onHindiMovieClick(HindiMoviesDataModel.ResultsBean2 hindimovies) {
         Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) hindimovies.getId();
-        intent.putExtra("movie_ID", id);
-        startActivity(intent);
+        if (id != 0){
+            intent.putExtra("movie_ID", id);
+            startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onTamilMovieClick(TamilMoviesDataModel.ResultsBean3 tamilmovies) {
         Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) tamilmovies.getId();
-        intent.putExtra("movie_ID", id);
-        startActivity(intent);
+        Toast.makeText(MainActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
+        if (id != 0){
+            intent.putExtra("movie_ID", id);
+            startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
     public void onKannadaMovieClick(KannadaMoviesDataModel.ResultsBean4 kannadamovies) {
         Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) kannadamovies.getId();
-        intent.putExtra("movie_ID", id);
-        startActivity(intent);
+        if (id != 0){
+            intent.putExtra("movie_ID", id);
+            startActivity(intent);
+        }else {
+            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
 
 

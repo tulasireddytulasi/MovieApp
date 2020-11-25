@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">ViewPagerBanner</string>
+    <string name="app_name">Movies App</string>
     <string name="search">Search</string>
     <string name="popular">Popular Movies</string>
+    <string name="popular1">POPULAR MOVIES</string>
     <string name="most_popular">Most Popular</string>
     <string name="now_playing">Now Playing</string>
     <string name="theaters">In Theaters</string>
@@ -33,6 +34,7 @@
     <string name="movie_revenue">Movie Revenue : $487.1 Million</string>
     <string name="movie_revenue_cost">$487.1 Million</string>
     <string name="story_line">Story Line</string>
+    <string name="NoData">No Data.....</string>
 
 
 </resources>

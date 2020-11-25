@@ -30,7 +30,6 @@
              android:maxLines="2"
              android:background="@drawable/textview_bg"
              android:textColor="@color/white"
-             android:textSize="20sp"
              android:fontFamily="@font/nexa_slab_regular"
              android:padding="5dp"
              android:layout_alignBottom="@+id/image"/>
