@@ -2,7 +2,7 @@ package com.example.viewpagerbanner.dataModel;
 
 import java.util.List;
 
-public abstract class Movie_page {
+public class Movie_page {
 
     private Credits credits;
     private int vote_count;
