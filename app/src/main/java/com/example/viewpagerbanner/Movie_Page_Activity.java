@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.viewpagerbanner.Adapter.CastAdapter;
-import com.example.viewpagerbanner.Adapter.CreditsAdater;
 import com.example.viewpagerbanner.Adapter.RecommedMoviesAdapter;
 import com.example.viewpagerbanner.Adapter.RecyclerviewAdapter1;
 import com.example.viewpagerbanner.dataModel.MoviePage1;
@@ -24,8 +23,6 @@ import com.example.viewpagerbanner.dataModel.NowPlaying;
 import com.example.viewpagerbanner.dataModel.RecommedDataModel;
 import com.example.viewpagerbanner.networkcalls.RetrofitClient;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
@@ -39,13 +36,12 @@ public class Movie_Page_Activity extends AppCompatActivity {
     private static final String API_KEY = "434fcadef5103207fecca9176385a533";
     private MoviePage1 moviePage1;
     private RecommedDataModel recommed;
-    private CreditsAdater creditsAdater;
     private CastAdapter castAdapter;
     private RecommedMoviesAdapter recommedMoviesAdapter;
     private Context context;
     private String genre;
     private LinearLayoutManager linearLayoutManager, linearLayoutManager1, linearLayoutManager2;
-    private RecyclerView recyclerView, recyclerViewcast, recyclerView_recommed;
+    private RecyclerView recyclerViewcast, recyclerView_recommed;
     private Button download, watchlist, share;
     private ImageView backdrop, poster;
 
@@ -62,7 +58,6 @@ public class Movie_Page_Activity extends AppCompatActivity {
         movierating = findViewById(R.id.movie_rating);
         genere = findViewById(R.id.movie_genres);
         context = getApplicationContext();
-        recyclerView = findViewById(R.id.recyclerview_crew);
         recyclerViewcast = findViewById(R.id.recyclerview_cast);
         recyclerView_recommed = findViewById(R.id.recyclerview_recommed);
         download = findViewById(R.id.download);
@@ -72,8 +67,6 @@ public class Movie_Page_Activity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(Movie_Page_Activity.this, LinearLayoutManager.HORIZONTAL, false);
         linearLayoutManager1 = new LinearLayoutManager(Movie_Page_Activity.this, LinearLayoutManager.HORIZONTAL, false);
         linearLayoutManager2 = new LinearLayoutManager(Movie_Page_Activity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setHasFixedSize(true);
         recyclerViewcast.setLayoutManager(linearLayoutManager1);
         recyclerViewcast.setHasFixedSize(true);
         recyclerView_recommed.setLayoutManager(linearLayoutManager2);
@@ -170,8 +163,6 @@ public class Movie_Page_Activity extends AppCompatActivity {
 
                                 castAdapter = new CastAdapter(context, moviePage1);
                                 recyclerViewcast.setAdapter(castAdapter);
-                            creditsAdater = new CreditsAdater(context, moviePage1);
-                          recyclerView.setAdapter(creditsAdater);
 
                             }catch (Exception e){
                                 e.printStackTrace();

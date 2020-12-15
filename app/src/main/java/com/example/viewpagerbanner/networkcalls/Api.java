@@ -44,7 +44,7 @@ public interface Api {
             @Query("page") int pageno
     );
 
-    @GET("movie/now_playing")
+    @GET("movie/popular")
     Call<TeluguMoviesDataModel> getTeluguNowPlayingMovies(
             @Query("api_key") String api_key,
             @Query("with_original_language") String language,
@@ -65,7 +65,7 @@ public interface Api {
             @Query("page") int pageno
     );
 
-    @GET("movie/now_playing")
+    @GET("movie/popular")
     Call<KannadaMoviesDataModel> getKannadaPopularMovies(
             @Query("api_key") String api_key,
             @Query("with_original_language") String language,

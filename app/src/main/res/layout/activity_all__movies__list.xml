@@ -9,7 +9,8 @@
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="#2196F3">
+        android:background="#2196F3"
+        android:visibility="invisible">
 
     </RelativeLayout>
 

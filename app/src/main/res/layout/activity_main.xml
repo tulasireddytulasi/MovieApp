@@ -64,7 +64,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="170dp"
                     android:clipToPadding="false"
                     android:overScrollMode="never">
 
@@ -129,7 +129,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nexa_slab_regular"
-                            android:text="@string/now_playing"
+                            android:text="@string/telugumovies"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 

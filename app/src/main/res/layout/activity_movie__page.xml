@@ -82,9 +82,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/poster"
-                android:drawableRight="@drawable/star"
+                android:drawableRight="@drawable/star2"
                 android:text="@string/rating"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/movie_rating1"
@@ -176,28 +176,13 @@
                 android:layout_below="@+id/cast"/>
 
 
-            <TextView
-                android:id="@+id/crew"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/recyclerview_cast"
-                android:layout_margin="15dp"
-                android:layout_marginStart="10dp"
-                android:text="Crew"
-                android:textSize="20sp"
-                android:textColor="@color/black" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_crew"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/crew"/>
 
             <TextView
                 android:id="@+id/recommed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/recyclerview_crew"
+                android:layout_below="@+id/recyclerview_cast"
                 android:layout_margin="15dp"
                 android:layout_marginStart="10dp"
                 android:text="Recommed Movies"
