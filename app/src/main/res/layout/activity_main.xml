@@ -100,7 +100,7 @@
                             android:layout_centerVertical="true"
                             android:fontFamily="@font/nexa_slab_regular"
                             android:text="@string/view"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </RelativeLayout>
@@ -140,7 +140,7 @@
                             android:layout_alignParentEnd="true"
                             android:fontFamily="@font/nexa_slab_regular"
                             android:text="@string/view"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </RelativeLayout>
@@ -183,7 +183,7 @@
                             android:layout_centerVertical="true"
                             android:fontFamily="@font/nexa_slab_regular"
                             android:text="@string/view"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </RelativeLayout>
@@ -223,7 +223,7 @@
                             android:layout_alignParentEnd="true"
                             android:fontFamily="@font/nexa_slab_regular"
                             android:text="@string/view"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </RelativeLayout>
@@ -264,7 +264,7 @@
                             android:layout_alignParentEnd="true"
                             android:fontFamily="@font/nexa_slab_regular"
                             android:text="@string/view"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </RelativeLayout>
