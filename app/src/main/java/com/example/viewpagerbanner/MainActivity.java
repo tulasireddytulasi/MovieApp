@@ -35,6 +35,9 @@ import com.example.viewpagerbanner.dataModel.PopularMoviesDataModel;
 import com.example.viewpagerbanner.dataModel.TamilMoviesDataModel;
 import com.example.viewpagerbanner.dataModel.TeluguMoviesDataModel;
 import com.example.viewpagerbanner.databinding.ActivityMainBinding;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private HindiMoviesAdapter hindiMoviesAdapter;
     private TamilMoviesAdapter tamilMoviesAdapter;
     private KannadaMoviesAdapter kannadaMoviesAdapter;
-    private LinearLayoutManager linearLayoutManager,linearLayoutManager2,linearLayoutManager3,linearLayoutManager4,linearLayoutManager5;
     private static final String API_KEY = "434fcadef5103207fecca9176385a533";
     private static final String telugu = "te";
     private static final String english = "en";
@@ -94,11 +96,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         setSupportActionBar(activityMainBinding.toolbar);
         topRatedmodel = new ArrayList<>();
         hindimodel = new ArrayList<>();
-        linearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        linearLayoutManager2 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        linearLayoutManager3 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        linearLayoutManager4 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        linearLayoutManager5 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager5 = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         activityMainBinding.recyclerview1.setLayoutManager(linearLayoutManager);
         activityMainBinding.recyclerview1.setHasFixedSize(true);
         activityMainBinding.recyclerview2.setLayoutManager(linearLayoutManager2);
@@ -196,9 +198,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         activityMainBinding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.item1: Toast.makeText(getApplicationContext(),"Search Bar",Toast.LENGTH_SHORT).show();
-                        break;
+                if (item.getItemId() == R.id.item1) {
+                    Toast.makeText(getApplicationContext(), "Search Bar", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .getNowPlayingMovies(API_KEY,PAGE_NO)
                 .enqueue(new Callback<NowPlaying>() {
                     @Override
-                    public void onResponse(Call<NowPlaying> call, Response<NowPlaying> response) {
+                    public void onResponse(@NotNull Call<NowPlaying> call, @NotNull Response<NowPlaying> response) {
                         if (response.body() != null) {
                             activityMainBinding.coordinator.setVisibility(View.VISIBLE);
                             nowplayingdata = response.body().getResults();
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         }
                     }
                     @Override
-                    public void onFailure(Call<NowPlaying> call, Throwable t) {
+                    public void onFailure(@NotNull Call<NowPlaying> call, @NotNull Throwable t) {
                     }
                 });
     }
@@ -238,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .getPopularMovies(API_KEY,PAGE_NO)
                 .enqueue(new Callback<PopularMoviesDataModel>() {
                     @Override
-                    public void onResponse(Call<PopularMoviesDataModel> call, Response<PopularMoviesDataModel> response) {
+                    public void onResponse(@NotNull Call<PopularMoviesDataModel> call, @NotNull Response<PopularMoviesDataModel> response) {
                         if (response.body() != null) {
                             data = response.body();
                             ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(MainActivity.this, data);
@@ -248,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     }
 
                     @Override
-                    public void onFailure(Call<PopularMoviesDataModel> call, Throwable t) {
+                    public void onFailure(@NotNull Call<PopularMoviesDataModel> call, @NotNull Throwable t) {
                     }
                 });
     }
@@ -259,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .getTeluguNowPlayingMovies(API_KEY, telugu, PAGE_NO)
                 .enqueue(new Callback<TeluguMoviesDataModel>() {
                     @Override
-                    public void onResponse(Call<TeluguMoviesDataModel> call, Response<TeluguMoviesDataModel> response) {
+                    public void onResponse(@NotNull Call<TeluguMoviesDataModel> call, @NotNull Response<TeluguMoviesDataModel> response) {
                         if (response.body() != null) {
                             topRatedmodel = response.body().getResults();
                             topRatedMoviesAdapter = new TeluguMoviesAdapter(MainActivity.this, topRatedmodel, MainActivity.this);
@@ -267,11 +268,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         }else {
                             Toast.makeText(getApplicationContext(), "Not Workinng", Toast.LENGTH_LONG).show();
                         }
-
                     }
 
                     @Override
-                    public void onFailure(Call<TeluguMoviesDataModel> call, Throwable t) {
+                    public void onFailure(@NotNull Call<TeluguMoviesDataModel> call, @NotNull Throwable t) {
 
                     }
                 });
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .getHindiPopularMovies(API_KEY, hindi, PAGE_NO)
                 .enqueue(new Callback<HindiMoviesDataModel>() {
                     @Override
-                    public void onResponse(Call<HindiMoviesDataModel> call, Response<HindiMoviesDataModel> response) {
+                    public void onResponse(@NotNull Call<HindiMoviesDataModel> call, @NotNull Response<HindiMoviesDataModel> response) {
                         if (response.body() != null) {
                             hindimodel = response.body().getResults();
                             hindiMoviesAdapter = new HindiMoviesAdapter(MainActivity.this, hindimodel, MainActivity.this);
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         }
                     }
                     @Override
-                    public void onFailure(Call<HindiMoviesDataModel> call, Throwable t) {
+                    public void onFailure(@NotNull Call<HindiMoviesDataModel> call, @NotNull Throwable t) {
 
                     }
                 });
@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .getTamilPopularMovies(API_KEY, tamil, PAGE_NO)
                 .enqueue(new Callback<TamilMoviesDataModel>() {
                     @Override
-                    public void onResponse(Call<TamilMoviesDataModel> call, Response<TamilMoviesDataModel> response) {
+                    public void onResponse(@NotNull Call<TamilMoviesDataModel> call, @NotNull Response<TamilMoviesDataModel> response) {
                         if (response.body() != null) {
                             tamilmodel = response.body().getResults();
                             tamilMoviesAdapter = new TamilMoviesAdapter(MainActivity.this, tamilmodel, MainActivity.this);
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         }
                     }
                     @Override
-                    public void onFailure(Call<TamilMoviesDataModel> call, Throwable t) {
+                    public void onFailure(@NotNull Call<TamilMoviesDataModel> call, @NotNull Throwable t) {
 
                     }
                 });
@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .getKannadaPopularMovies(API_KEY, kannada, PAGE_NO)
                 .enqueue(new Callback<KannadaMoviesDataModel>() {
                     @Override
-                    public void onResponse(Call<KannadaMoviesDataModel> call, Response<KannadaMoviesDataModel> response) {
+                    public void onResponse(@NotNull Call<KannadaMoviesDataModel> call, @NotNull Response<KannadaMoviesDataModel> response) {
                         if (response.body() != null) {
                             kannadamodel = response.body().getResults();
                             kannadaMoviesAdapter = new KannadaMoviesAdapter(MainActivity.this, kannadamodel, MainActivity.this);
@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         }
                     }
                     @Override
-                    public void onFailure(Call<KannadaMoviesDataModel> call, Throwable t) {
+                    public void onFailure(@NotNull Call<KannadaMoviesDataModel> call, @NotNull Throwable t) {
 
                     }
                 });
@@ -357,9 +357,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     @Override
-    public void onTeluguMoviesClick(TeluguMoviesDataModel.ResultsBean1 telugumovies) {
+    public void onTeluguMoviesClick(TeluguMoviesDataModel.ResultsBean1 teluguMovies) {
         Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
-        int id = (int) telugumovies.getId();
+        int id = (int) teluguMovies.getId();
         Toast.makeText(MainActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
         if (id != 0){
             intent.putExtra("movie_ID", id);
