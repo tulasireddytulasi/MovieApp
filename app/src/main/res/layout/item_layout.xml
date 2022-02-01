@@ -6,11 +6,11 @@
 
         <variable
             name="user"
-            type="com.example.viewpagerbanner.dataModel.NowPlaying.ResultsBean1" />
+            type="com.codefussion.movies.dataModel.NowPlaying.ResultsBean1" />
 
         <variable
             name="listener"
-            type="com.example.viewpagerbanner.networkcalls.OnClickListener" />
+            type="com.codefussion.movies.networkcalls.OnClickListener" />
 
     </data>
 

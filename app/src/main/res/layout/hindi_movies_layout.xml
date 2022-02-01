@@ -5,11 +5,11 @@
     <data>
         <variable
             name="users"
-            type="com.example.viewpagerbanner.dataModel.HindiMoviesDataModel.ResultsBean2"/>
+            type="com.codefussion.movies.dataModel.HindiMoviesDataModel.ResultsBean2"/>
 
         <variable
             name="listener"
-            type="com.example.viewpagerbanner.networkcalls.OnClickListener" />
+            type="com.codefussion.movies.networkcalls.OnClickListener" />
     </data>
 
     <LinearLayout

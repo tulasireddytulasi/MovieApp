@@ -6,11 +6,11 @@
 
         <variable
             name="users"
-            type="com.example.viewpagerbanner.dataModel.TeluguMoviesDataModel.ResultsBean1"/>
+            type="com.codefussion.movies.dataModel.TeluguMoviesDataModel.ResultsBean1"/>
 
         <variable
             name="listener"
-            type="com.example.viewpagerbanner.networkcalls.OnClickListener" />
+            type="com.codefussion.movies.networkcalls.OnClickListener" />
     </data>
 
     <LinearLayout
