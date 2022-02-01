@@ -27,14 +27,20 @@
     <string name="movie_time">2hr 40min</string>
     <string name="director">Director : Chritopher Nolan</string>
     <string name="director_name">Chritopher Nolan</string>
-    <string name="release_date">Release Date : 2014-11-05</string>
-    <string name="release_data1">2014-11-05</string>
+    <string name="release_date">Release Date : 2014–11–05</string>
+    <string name="release_data1">2014–11–05</string>
     <string name="movie_budget">Movie Budget : $165 Million</string>
     <string name="movie_budget_cost">$165 Million</string>
     <string name="movie_revenue">Movie Revenue : $487.1 Million</string>
     <string name="movie_revenue_cost">$487.1 Million</string>
     <string name="story_line">Story Line</string>
     <string name="NoData">No Data.....</string>
+    <string name="drama">Drama</string>
+    <string name="recommed_movies">Recommed Movies</string>
+    <string name="cast">Cast</string>
+    <string name="share">Share</string>
+    <string name="watch_list">Watch List</string>
+    <string name="download">Download</string>
 
 
 </resources>

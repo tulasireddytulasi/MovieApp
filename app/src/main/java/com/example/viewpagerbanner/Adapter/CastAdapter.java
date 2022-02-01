@@ -37,7 +37,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
 
         Glide.with(context)
                 .load("http://image.tmdb.org/t/p/w342/"+moviePage.getCredits().getCast().get(position).getProfile_path())
-                .placeholder(R.drawable.poster1)
+                .placeholder(R.drawable.movie_thumbnail)
                 .centerCrop()
                 .into(holder.imageView);
 

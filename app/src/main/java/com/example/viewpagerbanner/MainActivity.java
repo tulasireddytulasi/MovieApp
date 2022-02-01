@@ -143,66 +143,48 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     }
 
     private void NextActivity() {
-        activityMainBinding.englishMovies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movie_type = "popular";
-                language = english;
-                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
-                startActivity(intent2);
-            }
+        activityMainBinding.englishMovies.setOnClickListener(v -> {
+            movie_type = "popular";
+            language = english;
+            Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+            startActivity(intent2);
         });
 
-        activityMainBinding.teleguMovies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movie_type = "popular";
-                language = telugu;
-                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
-                startActivity(intent2);
-            }
+        activityMainBinding.teleguMovies.setOnClickListener(v -> {
+            movie_type = "popular";
+            language = telugu;
+            Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+            startActivity(intent2);
         });
 
-        activityMainBinding.hindiMovies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movie_type = "popular";
-                language = hindi;
-                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
-                startActivity(intent2);
-            }
+        activityMainBinding.hindiMovies.setOnClickListener(v -> {
+            movie_type = "popular";
+            language = hindi;
+            Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+            startActivity(intent2);
         });
 
-        activityMainBinding.tamilMovies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movie_type = "popular";
-                language = tamil;
-                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
-                startActivity(intent2);
-            }
+        activityMainBinding.tamilMovies.setOnClickListener(v -> {
+            movie_type = "popular";
+            language = tamil;
+            Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+            startActivity(intent2);
         });
 
-        activityMainBinding.kannadaMovies.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movie_type = "popular";
-                language = kannada;
-                Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
-                startActivity(intent2);
-            }
+        activityMainBinding.kannadaMovies.setOnClickListener(v -> {
+            movie_type = "popular";
+            language = kannada;
+            Intent intent2 = new Intent(MainActivity.this, All_Movies_List.class);
+            startActivity(intent2);
         });
     }
 
     private void ToolBars() {
-        activityMainBinding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.item1) {
-                    Toast.makeText(getApplicationContext(), "Search Bar", Toast.LENGTH_SHORT).show();
-                }
-                return true;
+        activityMainBinding.toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.item1) {
+                Toast.makeText(getApplicationContext(), "Search Bar", Toast.LENGTH_SHORT).show();
             }
+            return true;
         });
     }
 

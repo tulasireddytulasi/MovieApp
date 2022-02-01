@@ -147,7 +147,7 @@ public class TamilMoviesDataModel {
         public static void setProfileImage(ImageView imageView, String poster_path){
             Glide.with(imageView.getContext())
                     .load(poster_path)
-                    .placeholder(R.drawable.poster)
+                    .placeholder(R.drawable.movie_thumbnail)
                     .centerCrop()
                     .into(imageView);
         }

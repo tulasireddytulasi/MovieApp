@@ -42,7 +42,7 @@ public class RecommedMoviesAdapter extends RecyclerView.Adapter<RecommedMoviesAd
 
         Glide.with(context)
                 .load("http://image.tmdb.org/t/p/w342/"+results1.getResults().get(position).getPoster_path())
-                .placeholder(R.drawable.poster1)
+                .placeholder(R.drawable.movie_thumbnail)
                 .centerCrop()
                 .into(holder.imageView);
         holder.name.setText(results1.getResults().get(position).getTitle());

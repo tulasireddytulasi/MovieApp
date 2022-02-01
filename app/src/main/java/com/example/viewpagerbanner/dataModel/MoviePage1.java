@@ -507,7 +507,7 @@ public class MoviePage1 {
         public static void setProfileImg(ImageView view, String profile_path){
             Glide.with(view.getContext())
                     .load(profile_path)
-                    .placeholder(R.drawable.poster)
+                    .placeholder(R.drawable.movie_thumbnail)
                     .centerCrop()
                     .into(view);
         }
