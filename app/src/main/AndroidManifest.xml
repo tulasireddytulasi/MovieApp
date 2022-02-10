@@ -14,9 +14,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.codefussion.movies.All_Movies_List" />
-        <activity android:name="com.codefussion.movies.Movie_Page_Activity" />
-        <activity android:name="com.codefussion.movies.MainActivity"
+        <activity
+            android:name=".PopularActorsActivity"
+            android:exported="false" />
+        <activity android:name=".All_Movies_List" />
+        <activity android:name=".Movie_Page_Activity" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

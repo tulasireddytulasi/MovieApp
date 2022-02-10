@@ -17,12 +17,10 @@ import java.util.List;
 
 public class HindiMoviesAdapter extends RecyclerView.Adapter<HindiMoviesAdapter.HindiViewHolder>{
 
-    private Context context;
-    private List<HindiMoviesDataModel.ResultsBean2> resultsBean1s;
-    private OnClickListener onClickListener;
+    private final List<HindiMoviesDataModel.ResultsBean2> resultsBean1s;
+    private final OnClickListener onClickListener;
 
     public HindiMoviesAdapter(Context context, List<HindiMoviesDataModel.ResultsBean2> resultsBean1s, OnClickListener onClickListener){
-        this.context =context;
         this.resultsBean1s = resultsBean1s;
         this.onClickListener = onClickListener;
     }
@@ -50,7 +48,7 @@ public class HindiMoviesAdapter extends RecyclerView.Adapter<HindiMoviesAdapter.
         return resultsBean1s.size();
     }
 
-    public class HindiViewHolder extends RecyclerView.ViewHolder {
+    public static class HindiViewHolder extends RecyclerView.ViewHolder {
 
         HindiMoviesLayoutBinding hindiMoviesLayoutBinding;
 

@@ -100,8 +100,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/poster"
-                android:layout_margin="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/liberationserif_regular"
                 android:padding="5dp"
                 android:text="@string/NoData"
@@ -117,6 +119,7 @@
                 android:layout_marginTop="-5dp"
                 android:maxLines="2"
                 android:text="@string/geners"
+                android:textStyle="bold"
                 android:textColor="@color/lightblack" />
 
             <LinearLayout
