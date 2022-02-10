@@ -1,5 +1,7 @@
 package com.codefussion.movies.networkcalls;
 
+import com.codefussion.movies.dataModel.ActorsDataModel;
+import com.codefussion.movies.dataModel.ActorsMoviesDataModel;
 import com.codefussion.movies.dataModel.HindiMoviesDataModel;
 import com.codefussion.movies.dataModel.KannadaMoviesDataModel;
 import com.codefussion.movies.dataModel.MoviePage1;
@@ -94,12 +96,23 @@ public interface Api {
             @Query("page") int pageno
     );
 
-
     @GET("movie/{movie_id}/recommendations")
     Call<RecommedDataModel> getRecommedMovies(
             @Path("movie_id") int id,
             @Query("api_key") String api_key
             // @Body MoviePageDataModel moviePageDataModel
+    );
+
+    @GET("person/{actor_id}")
+    Call<ActorsDataModel> getActorsDetails(
+            @Path("actor_id") int id,
+            @Query("api_key") String api_key
+    );
+
+    @GET("person/{actor_id}/movie_credits")
+    Call<ActorsMoviesDataModel> getActorsMovies(
+            @Path("actor_id") int id,
+            @Query("api_key") String api_key
     );
 
 }

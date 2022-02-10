@@ -86,9 +86,7 @@ public class Movie_Page_Activity extends AppCompatActivity {
 
     private void buttons() {
         download.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
-
         watchlist.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
-
         share.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
     }
 
@@ -136,13 +134,12 @@ public class Movie_Page_Activity extends AppCompatActivity {
                                         for (int i = 0; i < moviePage1.getGenres().size(); i++) {
                                             genre = genre.concat(moviePage1.getGenres().get(i).getName() + " | ");
                                             Log.d("genre", moviePage1.getGenres().get(i).getName());
-                                            Log.d("genere5", genre);
                                             genere.setText(genre);
-                                            if (i == moviePage1.getGenres().size() - 1) {
-                                                genre = genre.substring(0, genre.length() - 2);
-                                                genere.setText(genre);
-                                            }
                                         }
+
+                                        genre = genre.substring(0, genre.length() - 2);
+                                        Log.d("genere9", genre);
+                                        genere.setText(genre);
                                     } else {
                                         genere.setText(R.string.drama);
                                     }
