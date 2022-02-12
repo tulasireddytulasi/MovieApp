@@ -19,14 +19,16 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("movie/now_playing")
+    @GET("movie/{movie_type}")
     Call<NowPlaying> getNowPlayingMovies(
+            @Path("movie_type") String movieType,
             @Query("api_key") String api_key,
             @Query("page") int pageno
     );
 
-    @GET("movie/popular")
+    @GET("movie/{movie_type}")
     Call<PopularMoviesDataModel> getPopularMovies(
+            @Path("movie_type") String movieType,
             @Query("api_key") String api_key,
             @Query("page") int pageno
     );
@@ -44,29 +46,33 @@ public interface Api {
             @Query("page") int pageno
     );
 
-    @GET("movie/popular")
+    @GET("movie/{movie_type}")
     Call<TeluguMoviesDataModel> getTeluguNowPlayingMovies(
+            @Path("movie_type") String movieType,
             @Query("api_key") String api_key,
             @Query("with_original_language") String language,
             @Query("page") int pageno
     );
 
-    @GET("movie/now_playing")
+    @GET("movie/{movie_type}")
     Call<HindiMoviesDataModel> getHindiPopularMovies(
+            @Path("movie_type") String movieType,
             @Query("api_key") String api_key,
             @Query("with_original_language") String language,
             @Query("page") int pageno
     );
 
-    @GET("movie/now_playing")
+    @GET("movie/{movie_type}")
     Call<TamilMoviesDataModel> getTamilPopularMovies(
+            @Path("movie_type") String movieType,
             @Query("api_key") String api_key,
             @Query("with_original_language") String language,
             @Query("page") int pageno
     );
 
-    @GET("movie/popular")
+    @GET("movie/{movie_type}")
     Call<KannadaMoviesDataModel> getKannadaPopularMovies(
+            @Path("movie_type") String movieType,
             @Query("api_key") String api_key,
             @Query("with_original_language") String language,
             @Query("page") int pageno

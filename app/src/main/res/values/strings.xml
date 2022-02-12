@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Movies App</string>
     <string name="search">Search</string>
+    <string name="movies">Movies</string>
     <string name="popular">Popular Movies</string>
     <string name="popular1">POPULAR MOVIES</string>
     <string name="most_popular">Most Popular</string>
@@ -61,6 +62,11 @@
     <string name="female">Female</string>
     <string name="no_data">-------</string>
     <string name="biography">Biography</string>
+    <string name="about_movie_label">About Movie</string>
+    <string name="status">Status:</string>
+    <string name="budget">Budget:</string>
+    <string name="revenue">Revenue:</string>
+    <string name="filter">Filter</string>
 
 
 </resources>
