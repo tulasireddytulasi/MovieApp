@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/shimmer_color"
+        app:cardCornerRadius="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/no_data" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nexa_slab_regular"
+                android:padding="5dp"
+                android:layout_alignBottom="@+id/image"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+        <include layout="@layout/shimmar_card_layout" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -19,4 +19,9 @@
         <item name="chipStrokeColor">@color/chip_strock_color</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/silver</item>
+        <item name="colorControlActivated">@color/gold</item>
+    </style>
+
 </resources>

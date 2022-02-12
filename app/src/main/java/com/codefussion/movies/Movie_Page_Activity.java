@@ -2,7 +2,10 @@ package com.codefussion.movies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +15,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.codefussion.movies.Adapter.CastAdapter;
 import com.codefussion.movies.Adapter.RecommedMoviesAdapter;
 import com.codefussion.movies.dataModel.MoviePage1;
@@ -95,7 +101,8 @@ public class Movie_Page_Activity extends AppCompatActivity {
     private void buttons() {
         download.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
         watchlist.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
-        share.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
+       // share.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
+        share.setOnClickListener(view -> shareImage(moviePage1.getPoster_path(), moviePage1.getTitle()));
     }
 
     private void movieDetails() {
@@ -218,6 +225,32 @@ public class Movie_Page_Activity extends AppCompatActivity {
                         Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void shareImage(String imageURL, String movieName) {
+        try {
+            String baseurl = "http://image.tmdb.org/t/p/w342";
+            String uri = baseurl.concat(imageURL);
+            Glide.with(getApplicationContext())
+                    .asBitmap()
+                    .load(uri)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            String path = MediaStore.Images.Media.insertImage(getContentResolver(), resource, "SomeText", null);
+                            Log.d("Path", path);
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_TEXT, movieName);
+                            Uri screenshotUri = Uri.parse(path);
+                            intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                            intent.setType("image/*");
+                            startActivity(Intent.createChooser(intent, "Share image via..."));
+                        }
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Can't Share Image",Toast.LENGTH_SHORT).show();
+        }
     }
 
 

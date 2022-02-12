@@ -28,7 +28,7 @@ import com.codefussion.movies.dataModel.PopularMoviesDataModel;
 import com.codefussion.movies.dataModel.TamilMoviesDataModel;
 import com.codefussion.movies.dataModel.TeluguMoviesDataModel;
 import com.codefussion.movies.databinding.ActivityMainBinding;
-import com.google.android.material.chip.ChipGroup;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -67,13 +67,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private PopularMoviesDataModel data;
     private Timer timer,timers;
     private AppCompatButton button;
+    private ShimmerFrameLayout shimmerlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        activityMainBinding.coordinator.setVisibility(View.INVISIBLE);
+        activityMainBinding.mainPageShimmer.startShimmer();
 //        final Handler handler = new Handler();
 //        final Runnable runnable = new Runnable() {
 //            @Override
@@ -113,12 +113,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
         try {
             if(isConnected()){
-                Toast.makeText(MainActivity.this, "Internet Alive", Toast.LENGTH_SHORT).show();
+                Toasty.success(MainActivity.this, "Internet Alive", Toast.LENGTH_SHORT).show();
                 ToolBars();
                 getMovies("popular");
                 NextActivity();
             }else {
-                Toast.makeText(MainActivity.this, "Internet Dead", Toast.LENGTH_SHORT).show();
+                Toasty.error(MainActivity.this, "Internet Dead", Toast.LENGTH_SHORT).show();
             }
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     break;
             }
         });
-
 
     }
 
@@ -216,7 +215,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     @Override
                     public void onResponse(@NotNull Call<NowPlaying> call, @NotNull Response<NowPlaying> response) {
                         if (response.body() != null) {
-                            activityMainBinding.coordinator.setVisibility(View.VISIBLE);
                             nowplayingdata = response.body().getResults();
                             adapter1 = new RecyclerviewAdapter1(MainActivity.this, nowplayingdata, MainActivity.this);
                             activityMainBinding.recyclerview1.setAdapter(adapter1);
@@ -235,14 +233,21 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 .enqueue(new Callback<PopularMoviesDataModel>() {
                     @Override
                     public void onResponse(@NotNull Call<PopularMoviesDataModel> call, @NotNull Response<PopularMoviesDataModel> response) {
+
                         if (response.body() != null) {
+                            activityMainBinding.mainPageShimmer.stopShimmer();
+                            activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
+                            activityMainBinding.mainLinearlayout.setVisibility(View.VISIBLE);
                             data = response.body();
                             ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(MainActivity.this, data);
                             activityMainBinding.viewpager.setAdapter(viewPagerAdapter);
                            // activityMainBinding.shimmer.stopShimmer();
                         }else {
+                            activityMainBinding.mainPageShimmer.stopShimmer();
+                            activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
+                            activityMainBinding.mainLinearlayout.setVisibility(View.VISIBLE);
                             Log.d("English Movies", "No " + movie_type + " movies..");
-                            Toasty.info(MainActivity.this, "No " + movie_type + " movies..", Toast.LENGTH_SHORT, true).show();
+                           // Toasty.info(MainActivity.this, "No " + movie_type + " movies..", Toast.LENGTH_SHORT, true).show();
                         }
                     }
 
@@ -266,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                             activityMainBinding.recyclerview2.setAdapter(topRatedMoviesAdapter);
                         }else {
                             Log.d("Telugu Movies", "No " + movie_type + " movies..");
-                            Toasty.info(MainActivity.this, "No " + movie_type + " movies..", Toast.LENGTH_SHORT, true).show();
+                           // Toasty.info(MainActivity.this, "No " + movie_type + " movies..", Toast.LENGTH_SHORT, true).show();
                         }
                     }
 
@@ -332,11 +337,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     @Override
                     public void onResponse(@NotNull Call<KannadaMoviesDataModel> call, @NotNull Response<KannadaMoviesDataModel> response) {
                         if (response.body() != null) {
+                            Log.d("Kannada Movies",movie_type + " movies.." + response.code());
                             kannadamodel = response.body().getResults();
                             kannadaMoviesAdapter = new KannadaMoviesAdapter(MainActivity.this, kannadamodel, MainActivity.this);
                             activityMainBinding.recyclerview5.setAdapter(kannadaMoviesAdapter);
+                            activityMainBinding.noData5.setVisibility(View.GONE);
                         }else {
                             Log.d("Kannada Movies", "No " + movie_type + " movies..");
+                            activityMainBinding.noData5.setVisibility(View.GONE);
                           //  Toasty.info(getApplicationContext(), "No " + movie_type + " movies..", Toast.LENGTH_LONG).show();
                         }
                     }
