@@ -2,12 +2,14 @@ package com.codefussion.movies;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -26,13 +28,16 @@ import com.codefussion.movies.dataModel.PopularMoviesDataModel;
 import com.codefussion.movies.dataModel.TamilMoviesDataModel;
 import com.codefussion.movies.dataModel.TeluguMoviesDataModel;
 import com.codefussion.movies.databinding.ActivityMainBinding;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,13 +66,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private static final int PAGE_NO = 1;
     private PopularMoviesDataModel data;
     private Timer timer,timers;
+    private AppCompatButton button;
+    private ShimmerFrameLayout shimmerlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        activityMainBinding.coordinator.setVisibility(View.INVISIBLE);
+        activityMainBinding.mainPageShimmer.startShimmer();
 //        final Handler handler = new Handler();
 //        final Runnable runnable = new Runnable() {
 //            @Override
@@ -103,35 +109,51 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         activityMainBinding.recyclerview5.setHasFixedSize(true);
 
         activityMainBinding.viewpager.setPadding(0, 0, 70, 0);
-        activityMainBinding.viewpager.setPageTransformer(true, new Gallery1());
+        //activityMainBinding.viewpager.setPageTransformer(true, new Gallery1());
 
-        NextActivity();
-//        final Handler handlers = new Handler();
-//        final Runnable runnables = new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(getApplicationContext(), Movie_Page_Activity.class);
-//                startActivity(intent);
-//            }
-//        };
-//        timers = new Timer();
-//        timers.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                handlers.post(runnables);
-//            }
-//        },5000);
+        try {
+            if(isConnected()){
+                Toasty.success(MainActivity.this, "Internet Alive", Toast.LENGTH_SHORT).show();
+                ToolBars();
+                getMovies("popular");
+                NextActivity();
+            }else {
+                Toasty.error(MainActivity.this, "Internet Dead", Toast.LENGTH_SHORT).show();
+            }
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
 
-        ToolBars();
-        PopularMovies();
-        InTheaters();
-        TeluguNowPlayingMovies();
-        HindiPopularMovies();
-        TamilPopularMovies();
-        KannadaPopularMovies();
+        activityMainBinding.chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId){
+                case R.id.chip1: getMovies("popular");
+                    break;
+                case R.id.chip2: getMovies("top_rated");
+                    break;
+                case R.id.chip3: getMovies("now_playing");
+                    break;
+                case R.id.chip4: getMovies("up_coming");
+                    break;
+                default: getMovies("popular");
+                    break;
+            }
+        });
 
     }
 
+    public void getMovies(String movie_type){
+        PopularMovies(movie_type);
+        InTheaters(movie_type);
+        TeluguNowPlayingMovies(movie_type);
+        HindiPopularMovies(movie_type);
+        TamilPopularMovies(movie_type);
+        KannadaPopularMovies(movie_type);
+    }
+
+    public boolean isConnected() throws InterruptedException, IOException {
+        String command = "ping -c 1 google.com";
+        return Runtime.getRuntime().exec(command).waitFor() == 0;
+    }
     private void NextActivity() {
         activityMainBinding.englishMovies.setOnClickListener(v -> {
             movie_type = "popular";
@@ -185,15 +207,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         return true;
     }
 
-    private void InTheaters() {
+    private void InTheaters(String movie_type) {
         RetrofitClient.getInstance()
                 .getApi()
-                .getNowPlayingMovies(API_KEY,PAGE_NO)
+                .getNowPlayingMovies(movie_type, API_KEY, PAGE_NO)
                 .enqueue(new Callback<NowPlaying>() {
                     @Override
                     public void onResponse(@NotNull Call<NowPlaying> call, @NotNull Response<NowPlaying> response) {
                         if (response.body() != null) {
-                            activityMainBinding.coordinator.setVisibility(View.VISIBLE);
                             nowplayingdata = response.body().getResults();
                             adapter1 = new RecyclerviewAdapter1(MainActivity.this, nowplayingdata, MainActivity.this);
                             activityMainBinding.recyclerview1.setAdapter(adapter1);
@@ -205,18 +226,28 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 });
     }
 
-    private void PopularMovies() {
+    private void PopularMovies(String movie_type) {
         RetrofitClient.getInstance()
                 .getApi()
-                .getPopularMovies(API_KEY,PAGE_NO)
+                .getPopularMovies(movie_type, API_KEY,PAGE_NO)
                 .enqueue(new Callback<PopularMoviesDataModel>() {
                     @Override
                     public void onResponse(@NotNull Call<PopularMoviesDataModel> call, @NotNull Response<PopularMoviesDataModel> response) {
+
                         if (response.body() != null) {
+                            activityMainBinding.mainPageShimmer.stopShimmer();
+                            activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
+                            activityMainBinding.mainLinearlayout.setVisibility(View.VISIBLE);
                             data = response.body();
                             ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(MainActivity.this, data);
                             activityMainBinding.viewpager.setAdapter(viewPagerAdapter);
                            // activityMainBinding.shimmer.stopShimmer();
+                        }else {
+                            activityMainBinding.mainPageShimmer.stopShimmer();
+                            activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
+                            activityMainBinding.mainLinearlayout.setVisibility(View.VISIBLE);
+                            Log.d("English Movies", "No " + movie_type + " movies..");
+                           // Toasty.info(MainActivity.this, "No " + movie_type + " movies..", Toast.LENGTH_SHORT, true).show();
                         }
                     }
 
@@ -226,10 +257,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 });
     }
 
-    private void TeluguNowPlayingMovies() {
+    private void TeluguNowPlayingMovies(String movie_type) {
+
         RetrofitClient.getInstance()
                 .getApi()
-                .getTeluguNowPlayingMovies(API_KEY, telugu, PAGE_NO)
+                .getTeluguNowPlayingMovies(movie_type,API_KEY, telugu, PAGE_NO)
                 .enqueue(new Callback<TeluguMoviesDataModel>() {
                     @Override
                     public void onResponse(@NotNull Call<TeluguMoviesDataModel> call, @NotNull Response<TeluguMoviesDataModel> response) {
@@ -238,21 +270,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                             topRatedMoviesAdapter = new TeluguMoviesAdapter(MainActivity.this, topRatedmodel, MainActivity.this);
                             activityMainBinding.recyclerview2.setAdapter(topRatedMoviesAdapter);
                         }else {
-                            Toast.makeText(getApplicationContext(), "Not Workinng", Toast.LENGTH_LONG).show();
+                            Log.d("Telugu Movies", "No " + movie_type + " movies..");
+                           // Toasty.info(MainActivity.this, "No " + movie_type + " movies..", Toast.LENGTH_SHORT, true).show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NotNull Call<TeluguMoviesDataModel> call, @NotNull Throwable t) {
 
+                        Log.e("Telugu Movies Error:", t.toString());
                     }
                 });
     }
 
-    private void HindiPopularMovies() {
+    private void HindiPopularMovies(String movie_type) {
         RetrofitClient.getInstance()
                 .getApi()
-                .getHindiPopularMovies(API_KEY, hindi, PAGE_NO)
+                .getHindiPopularMovies(movie_type, API_KEY, hindi, PAGE_NO)
                 .enqueue(new Callback<HindiMoviesDataModel>() {
                     @Override
                     public void onResponse(@NotNull Call<HindiMoviesDataModel> call, @NotNull Response<HindiMoviesDataModel> response) {
@@ -261,7 +295,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                             hindiMoviesAdapter = new HindiMoviesAdapter(MainActivity.this, hindimodel, MainActivity.this);
                             activityMainBinding.recyclerview3.setAdapter(hindiMoviesAdapter);
                         }else {
-                            Toast.makeText(getApplicationContext(), "No Connection", Toast.LENGTH_LONG).show();
+                            Log.d("Hindi Movies", "No " + movie_type + " movies..");
+                           // Toasty.info(getApplicationContext(), "No " + movie_type + " movies..", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
@@ -271,10 +306,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 });
     }
 
-    private void TamilPopularMovies(){
+    private void TamilPopularMovies(String movie_type){
         RetrofitClient.getInstance()
                 .getApi()
-                .getTamilPopularMovies(API_KEY, tamil, PAGE_NO)
+                .getTamilPopularMovies(movie_type, API_KEY, tamil, PAGE_NO)
                 .enqueue(new Callback<TamilMoviesDataModel>() {
                     @Override
                     public void onResponse(@NotNull Call<TamilMoviesDataModel> call, @NotNull Response<TamilMoviesDataModel> response) {
@@ -283,7 +318,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                             tamilMoviesAdapter = new TamilMoviesAdapter(MainActivity.this, tamilmodel, MainActivity.this);
                             activityMainBinding.recyclerview4.setAdapter(tamilMoviesAdapter);
                         }else {
-                            Toast.makeText(getApplicationContext(), "No Connection", Toast.LENGTH_LONG).show();
+                            Log.d("Tamil Movies", "No " + movie_type + " movies..");
+                          //  Toasty.info(getApplicationContext(), "No " + movie_type + " movies..", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
@@ -293,19 +329,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 });
     }
 
-    private void KannadaPopularMovies(){
+    private void KannadaPopularMovies(String movie_type){
         RetrofitClient.getInstance()
                 .getApi()
-                .getKannadaPopularMovies(API_KEY, kannada, PAGE_NO)
+                .getKannadaPopularMovies(movie_type, API_KEY, kannada, PAGE_NO)
                 .enqueue(new Callback<KannadaMoviesDataModel>() {
                     @Override
                     public void onResponse(@NotNull Call<KannadaMoviesDataModel> call, @NotNull Response<KannadaMoviesDataModel> response) {
                         if (response.body() != null) {
+                            Log.d("Kannada Movies",movie_type + " movies.." + response.code());
                             kannadamodel = response.body().getResults();
                             kannadaMoviesAdapter = new KannadaMoviesAdapter(MainActivity.this, kannadamodel, MainActivity.this);
                             activityMainBinding.recyclerview5.setAdapter(kannadaMoviesAdapter);
+                            activityMainBinding.noData5.setVisibility(View.GONE);
                         }else {
-                            Toast.makeText(getApplicationContext(), "No Connection", Toast.LENGTH_LONG).show();
+                            Log.d("Kannada Movies", "No " + movie_type + " movies..");
+                            activityMainBinding.noData5.setVisibility(View.GONE);
+                          //  Toasty.info(getApplicationContext(), "No " + movie_type + " movies..", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override

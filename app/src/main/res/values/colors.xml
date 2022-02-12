@@ -7,7 +7,14 @@
     <color name="black">#000</color>
     <color name="lightblack">#AD000000</color>
     <color name="yellow">#FFEB3B</color>
-    <color name="blue">#00BCD4</color>
+    <color name="blue">#0F4391</color>
     <color name="light_blue">#2196F3</color>
     <color name="transparent">#99141414</color>
+    <color name="pink">#7D2B7D</color>
+    <color name="lightpink">#FBF6FC</color>
+    <color name="lightwhite">#F3ECEC</color>
+    <color name="titan_white">#E6F0FF</color>
+    <color name="gold">#FFD700</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="shimmer_color">#BFBDBD</color>
 </resources>

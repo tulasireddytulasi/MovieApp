@@ -2,27 +2,36 @@ package com.codefussion.movies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.codefussion.movies.Adapter.CastAdapter;
 import com.codefussion.movies.Adapter.RecommedMoviesAdapter;
 import com.codefussion.movies.dataModel.MoviePage1;
 import com.codefussion.movies.dataModel.RecommedDataModel;
 import com.codefussion.movies.networkcalls.RetrofitClient;
 
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
@@ -32,7 +41,8 @@ import retrofit2.Response;
 public class Movie_Page_Activity extends AppCompatActivity {
 
     private int movie_id;
-    private TextView runtime, title, overview, movierating, genere;
+    private TextView runtime, title, overview, genere, status, budget, revenue, releaseRate;
+    private RatingBar movierating;
     private static final String API_KEY = "434fcadef5103207fecca9176385a533";
     private MoviePage1 moviePage1;
     private RecommedDataModel recommed;
@@ -55,6 +65,10 @@ public class Movie_Page_Activity extends AppCompatActivity {
         backdrop = findViewById(R.id.backdrop);
         poster = findViewById(R.id.posterImg);
         runtime = findViewById(R.id.runtime);
+        status = findViewById(R.id.status);
+        releaseRate = findViewById(R.id.release_date);
+        budget = findViewById(R.id.budget);
+        revenue = findViewById(R.id.revenue);
         title = findViewById(R.id.movietitle);
         overview = findViewById(R.id.overview);
         movierating = findViewById(R.id.movie_rating);
@@ -87,7 +101,8 @@ public class Movie_Page_Activity extends AppCompatActivity {
     private void buttons() {
         download.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
         watchlist.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
-        share.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
+       // share.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
+        share.setOnClickListener(view -> shareImage(moviePage1.getPoster_path(), moviePage1.getTitle()));
     }
 
     private void movieDetails() {
@@ -102,6 +117,7 @@ public class Movie_Page_Activity extends AppCompatActivity {
                             try {
                                 moviePage1 = response.body();
                                 Log.d("direct", moviePage1.getCredits().getCast().get(0).getName());
+                                Log.d("Movie Id", String.valueOf(moviePage1.getId()));
                                 Glide.with(getApplicationContext())
                                         .load("http://image.tmdb.org/t/p/w780" + moviePage1.getBackdrop_path())
                                         .placeholder(R.drawable.movie_thumbnail)
@@ -115,17 +131,31 @@ public class Movie_Page_Activity extends AppCompatActivity {
                                 int t = moviePage1.getRuntime();
                                 int hours = t / 60;
                                 int minutes = t % 60;
-                                runtime.setText(hours + "h " + minutes + "min");
-                                movierating.setText(String.valueOf(moviePage1.getVote_average()));
-//                            activityMoviePageBinding.releaseDate.setText("Release Date: "+moviePage1.getRelease_date());
-//                            Integer revenue = Math.round(moviePage1.getRevenue())/1000000;
-//                            activityMoviePageBinding.movieRevenue.setText("Revenue: "+revenue);
-//                            Integer budget = Math.round(moviePage1.getBudget())/1000000;
-//                            activityMoviePageBinding.movieBudget.setText("Budget: "+budget);
-                                overview.setText(moviePage1.getOverview());
+                                String movieRuntime = hours + "h " + minutes + "min";
+                                runtime.setText(movieRuntime);
+                                double rating = moviePage1.getVote_average() / 2;
+                                movierating.setRating((float) rating);
+                                releaseRate.setText(moviePage1.getRelease_date());
+                                status.setText(moviePage1.getStatus());
 
-//                            String dd = moviePage1.getGenres().get(0).getName();
-                                // Toast.makeText(context, movie_id, Toast.LENGTH_LONG).show();
+                                NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US);
+                                long doubleRevenue = moviePage1.getRevenue();
+                                if(doubleRevenue != 0.0){
+                                    String revenue1 = n.format(doubleRevenue);
+                                    revenue.setText(revenue1);
+                                }else{
+                                    revenue.setText("---------");
+                                }
+
+                                long doubleBudget = moviePage1.getBudget();
+                                if(doubleBudget != 0.0){
+                                    String budget1 = n.format(doubleBudget);
+                                    budget.setText(budget1);
+                                }else{
+                                    budget.setText("---------");
+                                }
+
+                                overview.setText(moviePage1.getOverview());
 
                                 try {
                                     int size = moviePage1.getGenres().size();
@@ -195,6 +225,32 @@ public class Movie_Page_Activity extends AppCompatActivity {
                         Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void shareImage(String imageURL, String movieName) {
+        try {
+            String baseurl = "http://image.tmdb.org/t/p/w342";
+            String uri = baseurl.concat(imageURL);
+            Glide.with(getApplicationContext())
+                    .asBitmap()
+                    .load(uri)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            String path = MediaStore.Images.Media.insertImage(getContentResolver(), resource, "SomeText", null);
+                            Log.d("Path", path);
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_TEXT, movieName);
+                            Uri screenshotUri = Uri.parse(path);
+                            intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                            intent.setType("image/*");
+                            startActivity(Intent.createChooser(intent, "Share image via..."));
+                        }
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Can't Share Image",Toast.LENGTH_SHORT).show();
+        }
     }
 
 

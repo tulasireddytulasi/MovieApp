@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/star2.xml" value="0.20833333333333334" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/time.xml" value="0.20833333333333334" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_all__movies__list.xml" value="0.14356884057971014" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
-        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_movie__page.xml" value="0.1852355072463768" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_movie__page.xml" value="0.1921875" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_popular_actors.xml" value="0.25" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/cast_layout.xml" value="0.1852355072463768" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/credit_layout.xml" value="0.1852355072463768" />
@@ -13,10 +15,13 @@
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/item.xml" value="0.1852355072463768" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/item_layout.xml" value="0.1852355072463768" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/kannada_movies_layout.xml" value="0.1852355072463768" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/layout.xml" value="0.1921875" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/movie_layout.xml" value="0.1671195652173913" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/recommed_movies_layout.xml" value="0.1852355072463768" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/recyclerviewlayout.xml" value="0.1852355072463768" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/shimmar_card_layout.xml" value="0.1921875" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/tamil_movies_layout.xml" value="0.1852355072463768" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/menu/menubar.xml" value="0.1921875" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20833333333333334" />
       </map>
     </option>
