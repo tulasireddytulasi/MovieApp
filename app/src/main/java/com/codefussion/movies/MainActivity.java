@@ -118,6 +118,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 getMovies("popular");
                 NextActivity();
             }else {
+                activityMainBinding.mainPageShimmer.stopShimmer();
+                activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
+                activityMainBinding.mainLinearlayout.setVisibility(View.GONE);
+                activityMainBinding.noInternet.setVisibility(View.VISIBLE);
                 Toasty.error(MainActivity.this, "Internet Dead", Toast.LENGTH_SHORT).show();
             }
         } catch (InterruptedException | IOException e) {
