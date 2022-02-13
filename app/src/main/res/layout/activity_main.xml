@@ -64,18 +64,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="visible">
-
                     <include layout="@layout/shimmar_layout"/>
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
-
-                <ImageView
-                    android:id="@+id/no_internet"
-                    android:layout_width="wrap_content"
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie_no_internet"
+                    android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/no_data_image"
+                    android:background="@drawable/lottie_bg"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/no_internet_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:layout_margin="20dp"
+                    android:text="@string/no_internet_connection"
                     android:visibility="gone"/>
 
                 <LinearLayout
@@ -95,40 +103,7 @@
 
                     </androidx.viewpager.widget.ViewPager>
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <RelativeLayout
-                            android:id="@+id/h1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/english"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/nexa_slab_regular"
-                                android:text="@string/theaters"
-                                android:textColor="@color/black"
-                                android:textSize="20sp" />
-
-                            <TextView
-                                android:id="@+id/english_movies"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:fontFamily="@font/nexa_slab_regular"
-                                android:text="@string/view"
-                                android:textColor="@color/black"
-                                android:textSize="15sp" />
-
-                        </RelativeLayout>
-                    </androidx.appcompat.widget.Toolbar>
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -178,6 +153,43 @@
                         </com.google.android.material.chip.ChipGroup>
 
                     </HorizontalScrollView>
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/white">
+
+                        <RelativeLayout
+                            android:id="@+id/h1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/english"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nexa_slab_regular"
+                                android:text="@string/theaters"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/english_movies"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/nexa_slab_regular"
+                                android:text="@string/view"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.Toolbar>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview1"

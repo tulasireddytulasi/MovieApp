@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.airbnb.lottie.LottieDrawable;
 import com.codefussion.movies.Adapter.HindiMoviesAdapter;
 import com.codefussion.movies.Adapter.KannadaMoviesAdapter;
 import com.codefussion.movies.Adapter.RecyclerviewAdapter1;
@@ -113,15 +114,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
         try {
             if(isConnected()){
-                Toasty.success(MainActivity.this, "Internet Alive", Toast.LENGTH_SHORT).show();
+               // Toasty.success(MainActivity.this, "Internet Alive", Toast.LENGTH_SHORT).show();
                 ToolBars();
                 getMovies("popular");
                 NextActivity();
             }else {
+                activityMainBinding.lottieNoInternet.setVisibility(View.VISIBLE);
+                activityMainBinding.noInternetText.setVisibility(View.VISIBLE);
+                activityMainBinding.lottieNoInternet.setAnimation(R.raw.no_internet_animation);
+                activityMainBinding.lottieNoInternet.setRepeatCount(LottieDrawable.INFINITE);
+                activityMainBinding.lottieNoInternet.setSpeed((float) 1.0);
+                activityMainBinding.lottieNoInternet.playAnimation();
                 activityMainBinding.mainPageShimmer.stopShimmer();
                 activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
                 activityMainBinding.mainLinearlayout.setVisibility(View.GONE);
-                activityMainBinding.noInternet.setVisibility(View.VISIBLE);
                 Toasty.error(MainActivity.this, "Internet Dead", Toast.LENGTH_SHORT).show();
             }
         } catch (InterruptedException | IOException e) {
