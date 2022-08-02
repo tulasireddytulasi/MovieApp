@@ -232,7 +232,7 @@
                 android:backgroundTint="@color/light_blue"
                 app:cornerRadius="5dp"
                 android:textSize="14sp"
-                android:text="@string/download" />
+                android:text="@string/save_info"/>
 
             <Button
                 android:id="@+id/watch_list"
@@ -243,7 +243,7 @@
                 android:backgroundTint="@color/light_blue"
                 app:cornerRadius="5dp"
                 android:textSize="14sp"
-                android:text="@string/watch_list" />
+                android:text="@string/my_list"/>
 
             <Button
                 android:id="@+id/share"

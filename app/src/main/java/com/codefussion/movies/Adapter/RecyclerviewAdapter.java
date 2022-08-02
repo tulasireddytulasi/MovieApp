@@ -53,11 +53,11 @@ public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.Result
                     .centerCrop()
                     .into(holder.imageView);
 
-            holder.title.setText(resultsBean.getTitle());
+          //  holder.title.setText(resultsBean.getTitle());
             double rating1 = resultsBean.getVote_average() / 2;
             int rating = (int) rating1;
             Log.d("rating 55:", String.valueOf(rating));
-            holder.ratingBar.setRating((float) rating);
+           // holder.ratingBar.setRating((float) rating);
 
             StringBuilder genre = new StringBuilder();
             String movieGenre = "";
@@ -90,7 +90,7 @@ public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.Result
                 movieGenre = movieGenre.substring(0, genre.length() - 2);
             }
 
-            holder.genretext.setText(movieGenre);
+          //  holder.genretext.setText(movieGenre);
 
             Log.d("Genre 55:", movieGenre);
 
@@ -111,7 +111,7 @@ public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.Result
         }
     }
 
-    private static DiffUtil.ItemCallback<StackApiRespnse.ResultsBean> DIFF_CALLBACK =
+    private static final DiffUtil.ItemCallback<StackApiRespnse.ResultsBean> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<StackApiRespnse.ResultsBean>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull StackApiRespnse.ResultsBean oldItem, @NonNull StackApiRespnse.ResultsBean newItem) {
@@ -125,20 +125,21 @@ public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.Result
                 }
             };
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         ImageView imageView;
-        TextView title, genretext;
-        RatingBar ratingBar;
+        TextView title;
+        //genretext;
+        // RatingBar ratingBar;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.card);
             imageView = itemView.findViewById(R.id.img);
             title = itemView.findViewById(R.id.title);
-            genretext = itemView.findViewById(R.id.card_genre);
-            ratingBar = itemView.findViewById(R.id.movie_card_rating);
+//            genretext = itemView.findViewById(R.id.card_genre);
+//            ratingBar = itemView.findViewById(R.id.movie_card_rating);
         }
     }
 }

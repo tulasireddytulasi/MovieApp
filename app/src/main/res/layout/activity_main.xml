@@ -90,8 +90,9 @@
                     android:id="@+id/main_linearlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                     <androidx.viewpager.widget.ViewPager

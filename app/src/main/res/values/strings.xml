@@ -40,8 +40,9 @@
     <string name="recommed_movies">Recommed Movies</string>
     <string name="cast">Cast</string>
     <string name="share">Share</string>
-    <string name="watch_list">Watch List</string>
+    <string name="my_list">My List</string>
     <string name="download">Download</string>
+    <string name="save_info">Save Info</string>
     <string name="biography_text">Robert John Downey Jr. (born April 4, 1965) is an American actor and producer.
         Downey made his screen debut in 1970, at the ages of five, when he appeared in his father\'s film Pound,
         and has worked consistently in film and television ever since. He received two Academy Award nominations
