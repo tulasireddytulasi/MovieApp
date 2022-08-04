@@ -79,6 +79,7 @@ public class Movie_Page_Activity extends AppCompatActivity {
         download = findViewById(R.id.download);
         watchlist = findViewById(R.id.watch_list);
         share = findViewById(R.id.share);
+      //  playbutton = findViewById(R.id.play_button);
         genre = "";
         // linearLayoutManager = new LinearLayoutManager(Movie_Page_Activity.this, LinearLayoutManager.HORIZONTAL, false);
         linearLayoutManager1 = new LinearLayoutManager(Movie_Page_Activity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -101,7 +102,7 @@ public class Movie_Page_Activity extends AppCompatActivity {
     private void buttons() {
         download.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
         watchlist.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
-       // share.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
+       // playbutton.setOnClickListener(v -> Toasty.info(context, "This Feature is not available right now...", Toast.LENGTH_SHORT, true).show());
         share.setOnClickListener(view -> shareImage(moviePage1.getPoster_path(), moviePage1.getTitle()));
     }
 

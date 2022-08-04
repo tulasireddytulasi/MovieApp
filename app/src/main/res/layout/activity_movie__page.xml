@@ -231,7 +231,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
                 app:cornerRadius="5dp"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:text="@string/save_info"/>
 
             <Button
@@ -242,7 +242,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
                 app:cornerRadius="5dp"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:text="@string/my_list"/>
 
             <Button
@@ -253,7 +253,7 @@
                 android:layout_weight="1"
                 app:backgroundTint="@color/light_blue"
                 app:cornerRadius="5dp"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:text="@string/share" />
 
         </LinearLayout>
