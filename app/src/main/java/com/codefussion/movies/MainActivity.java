@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +18,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.airbnb.lottie.LottieDrawable;
+import com.bumptech.glide.Glide;
 import com.codefussion.movies.Adapter.HindiMoviesAdapter;
 import com.codefussion.movies.Adapter.KannadaMoviesAdapter;
 import com.codefussion.movies.Adapter.RecyclerviewAdapter1;
 import com.codefussion.movies.Adapter.TamilMoviesAdapter;
 import com.codefussion.movies.Adapter.TeluguMoviesAdapter;
-import com.codefussion.movies.Transformation.Gallery1;
 import com.codefussion.movies.networkcalls.OnClickListener;
 import com.codefussion.movies.networkcalls.RetrofitClient;
 import com.codefussion.movies.dataModel.HindiMoviesDataModel;
@@ -30,6 +34,7 @@ import com.codefussion.movies.dataModel.TamilMoviesDataModel;
 import com.codefussion.movies.dataModel.TeluguMoviesDataModel;
 import com.codefussion.movies.databinding.ActivityMainBinding;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,12 +75,21 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private Timer timer,timers;
     private AppCompatButton button;
     private ShimmerFrameLayout shimmerlayout;
+    private BottomSheetDialog bottomSheetDialog;
+    private TextView movie_title;
+    private TextView movie_release_date;
+    private TextView overview;
+    private ImageView movie_poster;
+    private RelativeLayout infoCard;
+    private RelativeLayout movieInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         activityMainBinding.mainPageShimmer.startShimmer();
+        bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
+        setBottomSheetContent();
 //        final Handler handler = new Handler();
 //        final Runnable runnable = new Runnable() {
 //            @Override
@@ -149,6 +164,22 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
         });
 
+        bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
+    private void setBottomSheetContent() {
+        View view = getLayoutInflater().inflate(R.layout.movie_bottom_sheet, null, false);
+        bottomSheetDialog.setContentView(view);
+        CircleImageView closeDialog = view.findViewById(R.id.close_dialog);
+        movie_title = view.findViewById(R.id.movie_title);
+        movie_release_date = view.findViewById(R.id.movie_year);
+        overview = view.findViewById(R.id.movie_overview);
+        movie_poster = view.findViewById(R.id.movie_poster);
+        infoCard = view.findViewById(R.id.info_card);
+        movieInfo = view.findViewById(R.id.movie_info);
+        closeDialog.setOnClickListener(view1 -> {
+            bottomSheetDialog.dismiss();
+        });
     }
 
     public void getMovies(String movie_type){
@@ -367,63 +398,82 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
     @Override
     public void onClick(NowPlaying.ResultsBean1 nowPlaying) {
-        Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) nowPlaying.getId();
-        if (id != 0){
-            intent.putExtra("movie_ID", id);
-            startActivity(intent);
-        }else {
-            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
-        }
-
+        String movie_title_value = nowPlaying.getTitle();
+        String overview_value = nowPlaying.getOverview();
+        String movie_poster_value = nowPlaying.getPoster_path();
+        String date_value = nowPlaying.getRelease_date();
+        openDialog(id, movie_poster_value, movie_title_value, overview_value, date_value);
     }
 
     @Override
     public void onTeluguMoviesClick(TeluguMoviesDataModel.ResultsBean1 teluguMovies) {
-        Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) teluguMovies.getId();
-        Toast.makeText(MainActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
-        if (id != 0){
-            intent.putExtra("movie_ID", id);
-            startActivity(intent);
-        }else {
-            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
-        }
+        String movie_title_value = teluguMovies.getTitle();
+        String overview_value = teluguMovies.getOverview();
+        String movie_poster_value = teluguMovies.getPoster_path();
+        String date_value = teluguMovies.getRelease_date();
+        openDialog(id, movie_poster_value, movie_title_value, overview_value, date_value);
     }
 
     @Override
     public void onHindiMovieClick(HindiMoviesDataModel.ResultsBean2 hindimovies) {
-        Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) hindimovies.getId();
-        if (id != 0){
-            intent.putExtra("movie_ID", id);
-            startActivity(intent);
-        }else {
-            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
-        }
+        String movie_title_value = hindimovies.getTitle();
+        String overview_value = hindimovies.getOverview();
+        String movie_poster_value = hindimovies.getPoster_path();
+        String date_value = hindimovies.getRelease_date();
+        openDialog(id, movie_poster_value, movie_title_value, overview_value, date_value);
     }
 
     @Override
     public void onTamilMovieClick(TamilMoviesDataModel.ResultsBean3 tamilmovies) {
-        Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) tamilmovies.getId();
-        Toast.makeText(MainActivity.this, String.valueOf(id), Toast.LENGTH_SHORT).show();
-        if (id != 0){
-            intent.putExtra("movie_ID", id);
-            startActivity(intent);
-        }else {
-            Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
-        }
-
+        String movie_title_value = tamilmovies.getTitle();
+        String overview_value = tamilmovies.getOverview();
+        String movie_poster_value = tamilmovies.getPoster_path();
+        String date_value = tamilmovies.getRelease_date();
+        openDialog(id, movie_poster_value, movie_title_value, overview_value, date_value);
     }
 
     @Override
     public void onKannadaMovieClick(KannadaMoviesDataModel.ResultsBean4 kannadamovies) {
-        Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
         int id = (int) kannadamovies.getId();
-        if (id != 0){
-            intent.putExtra("movie_ID", id);
-            startActivity(intent);
+        String movie_title_value = kannadamovies.getTitle();
+        String overview_value = kannadamovies.getOverview();
+        String movie_poster_value = kannadamovies.getPoster_path();
+        String date_value = kannadamovies.getRelease_date();
+        openDialog(id, movie_poster_value, movie_title_value, overview_value, date_value);
+    }
+
+    void openDialog(int movie_id, String movie_poster_value, String movie_title_value, String overview_value, String date_value){
+        Intent intent = new Intent(MainActivity.this, Movie_Page_Activity.class);
+        movie_title.setText(movie_title_value);
+        overview.setText(overview_value);
+        movie_release_date.setText(date_value);
+        Glide.with(getApplicationContext())
+                .load("http://image.tmdb.org/t/p/w342" + movie_poster_value)
+                .placeholder(R.drawable.movie_thumbnail)
+                .centerCrop()
+                .into(movie_poster);
+        if (movie_id != 0){
+            if(bottomSheetDialog.isShowing()){
+                bottomSheetDialog.dismiss();
+            }
+            bottomSheetDialog.show();
+            movieInfo.setOnClickListener(view -> {
+                bottomSheetDialog.dismiss();
+                intent.putExtra("movie_ID", movie_id);
+                startActivity(intent);
+            });
+
+            infoCard.setOnClickListener(view -> {
+                bottomSheetDialog.dismiss();
+                intent.putExtra("movie_ID", movie_id);
+                startActivity(intent);
+            });
+
+
         }else {
             Toast.makeText(MainActivity.this, "No Data of this Movie", Toast.LENGTH_SHORT).show();
         }

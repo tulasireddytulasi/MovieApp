@@ -210,7 +210,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="5dp"
             android:text="@string/no_data"
-            android:textColor="@color/black"
+            android:textColor="#EFE6E6"
             android:textSize="14sp" />
 
 
@@ -230,9 +230,9 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
-                app:cornerRadius="5dp"
+                android:text="@string/save_info"
                 android:textSize="12sp"
-                android:text="@string/save_info"/>
+                app:cornerRadius="5dp" />
 
             <Button
                 android:id="@+id/watch_list"
@@ -241,9 +241,9 @@
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/light_blue"
-                app:cornerRadius="5dp"
+                android:text="@string/my_list"
                 android:textSize="12sp"
-                android:text="@string/my_list"/>
+                app:cornerRadius="5dp" />
 
             <Button
                 android:id="@+id/share"
@@ -251,10 +251,10 @@
                 android:layout_height="50dp"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                app:backgroundTint="@color/light_blue"
-                app:cornerRadius="5dp"
+                android:text="@string/share"
                 android:textSize="12sp"
-                android:text="@string/share" />
+                app:backgroundTint="@color/light_blue"
+                app:cornerRadius="5dp" />
 
         </LinearLayout>
 
