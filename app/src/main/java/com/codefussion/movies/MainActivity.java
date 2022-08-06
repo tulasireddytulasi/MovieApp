@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                             activityMainBinding.mainPageShimmer.setVisibility(View.GONE);
                             activityMainBinding.mainLinearlayout.setVisibility(View.VISIBLE);
                             data = response.body();
-                            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(MainActivity.this, data);
+                            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(MainActivity.this, data, MainActivity.this);
                             activityMainBinding.viewpager.setAdapter(viewPagerAdapter);
                            // activityMainBinding.shimmer.stopShimmer();
                         }else {
@@ -444,6 +444,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         String movie_poster_value = kannadamovies.getPoster_path();
         String date_value = kannadamovies.getRelease_date();
         openDialog(id, movie_poster_value, movie_title_value, overview_value, date_value);
+    }
+
+    @Override
+    public void onClickViewPager(int movieId, String movie_poster_value, String movie_title_value, String overview_value, String date_value) {
+        Log.d("movieId", String.valueOf(movieId));
+        Log.d("movie_poster_value", movie_poster_value);
+        Log.d("movie_title_value", movie_title_value);
+        Log.d("overview_value", overview_value);
+        Log.d("date_value", date_value);
+        openDialog(movieId, movie_poster_value, movie_title_value, overview_value, date_value);
     }
 
     void openDialog(int movie_id, String movie_poster_value, String movie_title_value, String overview_value, String date_value){

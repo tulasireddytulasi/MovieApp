@@ -12,4 +12,5 @@ public interface OnClickListener {
     void onHindiMovieClick(HindiMoviesDataModel.ResultsBean2 hindimovies);
     void onTamilMovieClick(TamilMoviesDataModel.ResultsBean3 tamilmovies);
     void onKannadaMovieClick(KannadaMoviesDataModel.ResultsBean4 kannadamovies);
+    void onClickViewPager(int movieId, String movie_poster_value, String movie_title_value, String overview_value, String date_value);
 }

@@ -2,13 +2,11 @@ package com.codefussion.movies.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,19 +17,21 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.codefussion.movies.Movie_Page_Activity;
 import com.codefussion.movies.R;
 import com.codefussion.movies.dataModel.StackApiRespnse;
+import com.codefussion.movies.networkcalls.OnClickListener2;
 
 import java.util.List;
 
 public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.ResultsBean, RecyclerviewAdapter.MyViewHolder> {
 
-    private Context context;
+    private final Context context;
+    private OnClickListener2 onClickListener;
 
-    public RecyclerviewAdapter(Context context) {
+    public RecyclerviewAdapter(Context context, OnClickListener2 onClickListener) {
         super(DIFF_CALLBACK);
         this.context = context;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -95,14 +95,13 @@ public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.Result
             Log.d("Genre 55:", movieGenre);
 
 
-            holder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, Movie_Page_Activity.class);
-                    int id = (int) resultsBean.getId();
-                    intent.putExtra("movie_ID", id);
-                    context.startActivity(intent);
-                }
+            holder.cardView.setOnClickListener(v -> {
+                int id = (int) resultsBean.getId();
+                String movie_title_value = resultsBean.getTitle();
+                String overview_value = resultsBean.getOverview();
+                String movie_poster_value = resultsBean.getPoster_path();
+                String date_value = resultsBean.getRelease_date();
+                onClickListener.onClick(id, movie_poster_value, movie_title_value, overview_value, date_value);
             });
 
 

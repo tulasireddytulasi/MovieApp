@@ -7,7 +7,7 @@ public class RetrofitClient {
 
     private static final String BASE_URL = "https://api.themoviedb.org/3/";
     private static RetrofitClient minstance;
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
     private RetrofitClient(){
         retrofit = new Retrofit.Builder()

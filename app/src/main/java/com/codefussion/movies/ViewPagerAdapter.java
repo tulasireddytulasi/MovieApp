@@ -14,17 +14,20 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.codefussion.movies.dataModel.PopularMoviesDataModel;
+import com.codefussion.movies.networkcalls.OnClickListener;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
     private LayoutInflater layoutInflater;
     private PopularMoviesDataModel data;
     Context context;
+    private OnClickListener onClickListener;
 
 
-    ViewPagerAdapter(Context context, PopularMoviesDataModel data){
+    ViewPagerAdapter(Context context, PopularMoviesDataModel data, OnClickListener onClickListener){
         this.context = context;
         this.data = data;
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -50,14 +53,13 @@ public class ViewPagerAdapter extends PagerAdapter {
         Glide.with(context).load("http://image.tmdb.org/t/p/w780"+data.getResults().get(position).getBackdrop_path())
                 .apply(new RequestOptions().centerCrop())
                 .into(imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Movie_Page_Activity.class);
-                int id = (int) data.getResults().get(position).getId();
-                intent.putExtra("movie_ID", id);
-                context.startActivity(intent);
-            }
+        imageView.setOnClickListener(v -> {
+            int id = (int) data.getResults().get(position).getId();
+            String movie_title_value = data.getResults().get(position).getTitle();
+            String overview_value = data.getResults().get(position).getOverview();
+            String movie_poster_value = data.getResults().get(position).getPoster_path();
+            String date_value = data.getResults().get(position).getRelease_date();
+            onClickListener.onClickViewPager(id, movie_poster_value, movie_title_value, overview_value, date_value);
         });
         titlename.setText(data.getResults().get(position).getTitle());
 
