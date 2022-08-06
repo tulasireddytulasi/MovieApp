@@ -36,10 +36,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:fontFamily="@font/nexa_slab_regular"
                         android:text="@string/movies"
                         android:textColor="@color/black"
                         android:textSize="28sp"
                         android:textStyle="bold" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_pic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/person"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
 
                 </RelativeLayout>
 

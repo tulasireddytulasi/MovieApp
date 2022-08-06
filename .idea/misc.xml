@@ -8,6 +8,7 @@
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/lottie_bg.xml" value="0.20833333333333334" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/love.xml" value="0.18518518518518517" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/navbar.xml" value="0.18518518518518517" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/person.xml" value="0.18518518518518517" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/rounded_dialog.xml" value="0.18518518518518517" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/search.xml" value="0.182648401826484" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/star.xml" value="0.182648401826484" />
@@ -16,7 +17,7 @@
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/drawable/time.xml" value="0.20833333333333334" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_all__movies__list.xml" value="0.14356884057971014" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
-        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_movie__page.xml" value="0.2957486136783734" />
+        <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_movie__page.xml" value="0.25" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/activity_popular_actors.xml" value="0.25" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/cast_layout.xml" value="0.1852355072463768" />
         <entry key="..\:/Android studio/My personal projects/MovieApp/app/src/main/res/layout/credit_layout.xml" value="0.1852355072463768" />

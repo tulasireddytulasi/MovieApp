@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private ImageView movie_poster;
     private RelativeLayout infoCard;
     private RelativeLayout movieInfo;
+    private CircleImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         activityMainBinding.mainPageShimmer.startShimmer();
         bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
+        profilePic = findViewById(R.id.profile_pic);
         setBottomSheetContent();
 //        final Handler handler = new Handler();
 //        final Runnable runnable = new Runnable() {
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             if(isConnected()){
                // Toasty.success(MainActivity.this, "Internet Alive", Toast.LENGTH_SHORT).show();
                 ToolBars();
+                OpenProfile();
                 getMovies("popular");
                 NextActivity();
             }else {
@@ -165,6 +168,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         });
 
         bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
+    private void OpenProfile(){
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setBottomSheetContent() {

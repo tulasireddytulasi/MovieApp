@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/item1"
-        android:icon="@drawable/money_heist"
-        android:orderInCategory="100"
-        android:title="@string/filter"
-        app:showAsAction="always"/>
+<!--    <item-->
+<!--        android:id="@+id/item1"-->
+<!--        android:icon="@drawable/person"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="@string/filter"-->
+<!--        app:showAsAction="always"/>-->
 
 </menu>
