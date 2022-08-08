@@ -26,7 +26,7 @@ import java.util.List;
 public class RecyclerviewAdapter extends PagedListAdapter<StackApiRespnse.ResultsBean, RecyclerviewAdapter.MyViewHolder> {
 
     private final Context context;
-    private OnClickListener2 onClickListener;
+    private final OnClickListener2 onClickListener;
 
     public RecyclerviewAdapter(Context context, OnClickListener2 onClickListener) {
         super(DIFF_CALLBACK);

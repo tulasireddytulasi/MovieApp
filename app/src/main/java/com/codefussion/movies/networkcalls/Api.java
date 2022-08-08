@@ -121,6 +121,13 @@ public interface Api {
             @Query("api_key") String api_key
     );
 
+    @GET("search/movie/")
+    Call<PopularMoviesDataModel> getSearchMovies(
+            @Query("api_key") String api_key,
+            @Query("query") String query,
+            @Query("page") int pageno
+    );
+
 }
 
 

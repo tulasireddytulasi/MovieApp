@@ -19,8 +19,8 @@ import java.util.List;
 public class TeluguMoviesAdapter extends RecyclerView.Adapter<TeluguMoviesAdapter.TeluguViewHolder>{
 
     private Context context;
-    private List<TeluguMoviesDataModel.ResultsBean1> resultsBean1s;
-    private OnClickListener onClickListener;
+    private final List<TeluguMoviesDataModel.ResultsBean1> resultsBean1s;
+    private final OnClickListener onClickListener;
 
     public TeluguMoviesAdapter(Context context, List<TeluguMoviesDataModel.ResultsBean1> resultsBean1s, OnClickListener onClickListener){
         this.context =context;
@@ -33,8 +33,7 @@ public class TeluguMoviesAdapter extends RecyclerView.Adapter<TeluguMoviesAdapte
     public TeluguViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         TeluguMoviesLayoutBinding teluguMoviesLayoutBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(viewGroup.getContext()), R.layout.telugu_movies_layout,viewGroup,false);
-        TeluguViewHolder teluguViewHolder = new TeluguViewHolder(teluguMoviesLayoutBinding);
-        return teluguViewHolder;
+        return new TeluguViewHolder(teluguMoviesLayoutBinding);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class TeluguMoviesAdapter extends RecyclerView.Adapter<TeluguMoviesAdapte
         return resultsBean1s.size();
     }
 
-    public class TeluguViewHolder extends RecyclerView.ViewHolder {
+    public static class TeluguViewHolder extends RecyclerView.ViewHolder {
 
         TeluguMoviesLayoutBinding teluguMoviesLayoutBinding;
 

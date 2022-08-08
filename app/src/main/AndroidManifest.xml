@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".MoviesSearch"
+            android:exported="false" />
+        <activity
             android:name=".PopularActorsActivity"
             android:exported="false" />
         <activity android:name=".All_Movies_List" />
