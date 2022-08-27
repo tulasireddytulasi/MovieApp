@@ -69,7 +69,8 @@
     <string name="revenue">Revenue:</string>
     <string name="filter">Filter</string>
     <string name="no_internet_connection">Opps! No Internet Connection, Please check it..</string>
-    <string name="search_movies">Search movies...</string>
+    <string name="search_movies">Search movies</string>
+    <string name="search_icon">search_icon</string>
 
 
 </resources>

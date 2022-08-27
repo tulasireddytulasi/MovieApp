@@ -9,26 +9,20 @@
     android:background="@color/light_white"
     tools:context=".MoviesSearch">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/edit"
-        android:visibility="visible"
-        app:defaultQueryHint="@string/search_movies"
-        app:queryHint="@string/search_movies" />
-
     <EditText
-        android:id="@+id/edit_text"
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:maxLines="1"
-        android:visibility="gone"
-        android:background="@drawable/edit"
-        android:hint="@string/search_movies"/>
+        android:visibility="visible"
+        android:drawableStart="@drawable/search_icon"
+        android:background="@drawable/search_bg"
+        android:hint="@string/search_movies"
+        android:autofillHints="no"
+        android:imeOptions="actionSearch"
+        android:inputType="text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_movies_recyclerview"

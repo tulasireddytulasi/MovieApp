@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,9 +88,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private RelativeLayout infoCard;
     private RelativeLayout movieInfo;
     private CircleImageView profilePic;
-    private ImageView profilePic1;
-    private SearchView searchView;
-    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,12 +96,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         activityMainBinding.mainPageShimmer.startShimmer();
         bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
         profilePic = findViewById(R.id.profile_pic);
-//        searchView = findViewById(R.id.search_view);
-//        searchView.clearFocus();
-        editText = findViewById(R.id.edit_text);
-       // editText.setFocusable(true);
-        editText.setEnabled(true);
-        editText.setOnClickListener(view -> {
+        LinearLayout searchBarLayout = findViewById(R.id.search_bar_layout);
+        searchBarLayout.setOnClickListener(view -> {
             Intent movieSearchIntent = new Intent(MainActivity.this, MoviesSearch.class);
             startActivity(movieSearchIntent);
         });
@@ -207,9 +201,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         movie_poster = view.findViewById(R.id.movie_poster);
         infoCard = view.findViewById(R.id.info_card);
         movieInfo = view.findViewById(R.id.movie_info);
-        closeDialog.setOnClickListener(view1 -> {
-            bottomSheetDialog.dismiss();
-        });
+        closeDialog.setOnClickListener(view1 -> bottomSheetDialog.dismiss());
     }
 
     public void getMovies(String movie_type) {
