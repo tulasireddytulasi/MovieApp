@@ -18,12 +18,12 @@ import java.util.List;
 
 public class RecyclerviewAdapter1 extends RecyclerView.Adapter<RecyclerviewAdapter1.MyViewHolder> {
 
-    private Context context;
-    private List<NowPlaying.ResultsBean1> data;
+    private final Context context;
+    private final List<NowPlaying.ResultsBean1> data;
     private NowPlaying.ResultsBean1 datas;
-    private OnClickListener onClickListener;
+    private final OnClickListener onClickListener;
 
-    public RecyclerviewAdapter1(Context context,List<NowPlaying.ResultsBean1> data, OnClickListener onClickListener) {
+    public RecyclerviewAdapter1(Context context, List<NowPlaying.ResultsBean1> data, OnClickListener onClickListener) {
         this.data = data;
         this.context = context;
         this.onClickListener = onClickListener;
@@ -50,14 +50,7 @@ public class RecyclerviewAdapter1 extends RecyclerView.Adapter<RecyclerviewAdapt
     @Override
     public int getItemCount() { return data.size(); }
 
-//    @Override
-//    public void onClick(NowPlaying.ResultsBean1 nowPlaying) {
-////       NowPlaying.ResultsBean1 po = datas;
-//        Toast.makeText(context, "You clicked " + nowPlaying.getTitle(),
-//                Toast.LENGTH_LONG).show();
-//    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         ItemLayoutBinding itemLayoutBinding;
         public MyViewHolder(@NonNull ItemLayoutBinding itemLayoutBinding) {

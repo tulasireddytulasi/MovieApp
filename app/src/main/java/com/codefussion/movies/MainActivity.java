@@ -408,10 +408,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                             kannadamodel = response.body().getResults();
                             kannadaMoviesAdapter = new KannadaMoviesAdapter(MainActivity.this, kannadamodel, MainActivity.this);
                             activityMainBinding.recyclerview5.setAdapter(kannadaMoviesAdapter);
-                            activityMainBinding.noData5.setVisibility(View.GONE);
                         } else {
                             Log.d("Kannada Movies", "No " + movie_type + " movies..");
-                            activityMainBinding.noData5.setVisibility(View.GONE);
                             //  Toasty.info(getApplicationContext(), "No " + movie_type + " movies..", Toast.LENGTH_LONG).show();
                         }
                     }

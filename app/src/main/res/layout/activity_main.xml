@@ -99,19 +99,6 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="61dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/edit"
-                android:elevation="2dp"
-                android:hint="@string/search_movies"
-                android:inputType="none"
-                android:visibility="gone"
-                android:maxLines="1"
-                android:padding="10dp" />
-
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scroll1"
                 android:layout_width="match_parent"
@@ -169,7 +156,6 @@
 
                         </androidx.viewpager.widget.ViewPager>
 
-
                         <HorizontalScrollView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -221,8 +207,7 @@
 
                         <androidx.appcompat.widget.Toolbar
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_height="40dp"
                             android:background="@color/white">
 
                             <RelativeLayout
@@ -259,19 +244,24 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <androidx.appcompat.widget.Toolbar
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp">
 
                             <RelativeLayout
                                 android:id="@+id/h2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -299,13 +289,17 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <androidx.appcompat.widget.Toolbar
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp">
 
                             <RelativeLayout
                                 android:id="@+id/h3"
@@ -313,7 +307,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_marginBottom="10dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -342,19 +335,24 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview3"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <androidx.appcompat.widget.Toolbar
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp">
 
                             <RelativeLayout
                                 android:id="@+id/h4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -379,23 +377,27 @@
                             </RelativeLayout>
                         </androidx.appcompat.widget.Toolbar>
 
-
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerview4"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
                         <androidx.appcompat.widget.Toolbar
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp">
 
                             <RelativeLayout
                                 android:id="@+id/h5"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -420,41 +422,25 @@
                             </RelativeLayout>
                         </androidx.appcompat.widget.Toolbar>
 
-
-                        <LinearLayout
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:clipToPadding="false"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:layout_marginBottom="20dp">
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerview5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
-                            <ImageView
-                                android:id="@+id/no_data_5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="160dp"
-                                android:contentDescription="@string/no_data"
-                                android:src="@drawable/no_data_image"
-                                android:visibility="gone" />
-
-                        </LinearLayout>
-
+                        </androidx.recyclerview.widget.RecyclerView>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </layout>
 
