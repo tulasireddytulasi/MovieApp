@@ -59,6 +59,9 @@ public class MoviesSearch extends AppCompatActivity implements OnClickListener2 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_search);
         searchView = findViewById(R.id.search_view);
+        // Set soft input mode
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        showKeyBoard(searchView);
         bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
         setBottomSheetContent();
         recyclerView = findViewById(R.id.search_movies_recyclerview);
@@ -88,9 +91,7 @@ public class MoviesSearch extends AppCompatActivity implements OnClickListener2 
         /// Keyboard closes when clicking on search button in keyboard
         searchView.setOnEditorActionListener((textView, i, keyEvent) -> {
             if(i == EditorInfo.IME_ACTION_SEARCH){
-                searchView.clearFocus();
-                InputMethodManager in = (InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                in.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+                hideKeyBoard(searchView);
                 return  true;
             }
             return false;
@@ -98,12 +99,23 @@ public class MoviesSearch extends AppCompatActivity implements OnClickListener2 
 
         /// Keyboard closes when scrolling
         recyclerView.setOnTouchListener((view, motionEvent) -> {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
+            hideKeyBoard(searchView);
             return false;
         });
 
         bottomSheetDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
+    private void showKeyBoard(EditText editText){
+        InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.showSoftInput(editText.getRootView(), InputMethodManager.SHOW_IMPLICIT);
+        editText.requestFocus();
+    }
+
+    private void hideKeyBoard(EditText editText){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        editText.clearFocus();
     }
 
     private void setBottomSheetContent() {
